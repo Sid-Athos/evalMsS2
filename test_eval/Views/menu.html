@@ -1,0 +1,43 @@
+<div class="container" style="width:300px;position:absolute;right:15px;top:52px">
+    <form  method="POST" style="width:300px">
+    <div class="dropdown" >
+            <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Ajouter
+            </button>
+                <div class="dropdown-menu" style="background-color:transparent;margin-right:-13px;margin-top:-8px;border:none" aria-labelledby="dropdownMenuButton">
+                    <button class="btn btn-secondary" type="submit" name ="choice" value="addRole">Ajouter un role</button><br>
+                    <button class="btn btn-secondary" type="submit" name ="choice" value="addGroup">Ajouter un groupe</button><br>
+                    <button class="btn btn-secondary" type="submit" name ="choice" value="addStud">Ajouter un nouvel élève</button><br>
+                </div>
+        </div>
+        <div class="dropdown" >
+            <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Affecter
+            </button>
+                <div class="dropdown-menu" style="background-color:transparent;margin-right:-13px;margin-top:-8px;border:none" aria-labelledby="dropdownMenuButton">
+                    <button class="btn btn-secondary" type="submit" name ="choice" value="linkS">Affecter un élève à un groupe</button><br>
+                    <button class="btn btn-secondary" type="submit" name ="choice" value="LinkR">Affecter un responsable à un groupe</button><br>
+                </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Modifier
+            </button>
+                <div class="dropdown-menu" style="background-color:transparent;margin-right:-13px;margin-top:-8px;border:none" aria-labelledby="dropdownMenuButton">
+                    <button class="btn btn-secondary" type="submit" name ="choice" value="groupMod">Modifier un groupe</button><br>
+                    <button class="btn btn-secondary" type="submit" name="choice" value="studmod">Modifier les informations d'un élève</button><br>
+                    <button class="btn btn-secondary" type="submit" name="choice" value="roleMod">Modifier un rôle</button><br>
+                </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Afficher
+            </button>
+                <div class="dropdown-menu" style="background-color:transparent;margin-right:-13px;margin-top:-8px;border:none" aria-labelledby="dropdownMenuButton">
+                    <button class="btn btn-secondary" type="submit" name="choice" value="showS">Liste des élèves</button><br>
+                    <button class="btn btn-secondary" type="submit" name ="choice" value="showG">Liste des groupes</button><br>
+                </div>
+        </div>
+    </form>
+</div>
+</body>

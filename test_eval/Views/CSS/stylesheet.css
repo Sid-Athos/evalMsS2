@@ -1,0 +1,11 @@
+body {
+    font-family: 'Raleway', sans-serif;
+}
+                   
+.btn.btn-secondary{
+    width:300px;
+}
+
+.form-control{
+    width:200px;
+}
