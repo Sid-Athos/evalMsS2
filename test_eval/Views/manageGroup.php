@@ -3,8 +3,8 @@
 ?>
         <form method="POST" style="text-align:center">
         Nom du groupe :<br>
-        <input type="text" name="grpName" 
-        value="<?php echo $res[0]['GroupeName'];?>"
+        <input type="text" name="grpName" style="text-align:center" 
+        value="<?php echo $res0[0]['name'];?>"
         minlength="3" pattern="^[a-zA-Z -]+$"
         required><br>
         <ul>
@@ -24,6 +24,9 @@
             }
         ?>
             <br>
+            <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="killGroup" value="yes">Supprimer le groupe<br>
+            </div>
             <button type="submit" class="btn btn-secondary" name="rmvFromGrp">
                 Modifier le groupe
             </button>

@@ -19,6 +19,10 @@
                             $res = getRoles($db);
                             include('Views/addRoleForm.php');
                         break;
+                    case 'roleMod':
+                            $res = getRoles($db);
+                            include('Views/roleMod.php');
+                        break; 
                     case 'addGroup':
                             $res = getGroups($db);
                             $res0 = getPupils($db);
@@ -97,7 +101,7 @@
                     $query =
                     "INSERT INTO APPARTIENT(id, personneID, groupeID, manager)
                     VALUES(NULL, :peep, :grp,:persID)";
-                    
+                    echo "dhusjqgdhjsqdgfsqh";
                     linkPupToGroup($db,$query,$peep,$grp);
 
                     if($check === false)
@@ -131,15 +135,15 @@
                         $peep = $_SESSION['peep'];
                         unset($_SESSION['peep']);
                         $query = 
-                        "INSERT INTO APPARTIENT(id, personneID, groupeID)
-                        VALUES(NULL,:peep,:grp)";
+                        "INSERT INTO APPARTIENT(id, personneID, groupeID, manager)
+                        VALUES(NULL,:peep,:grp,:persID)";
 
                         for($i = 0; $i < count($_POST['grpTo']);$i++)
                         {
                             $grp = $_POST['grpTo'][$i];
-                            $check = linkPupToGroup($db,$query,$peep,$grp);
+                            $check = linkPupToGroups($db,$query,$peep,$grp);
                         }
-                        if($check)
+                        if($check === true)
                         {
                             echo "<br>GG";
                         }
@@ -163,7 +167,6 @@
                         $query =
                         "INSERT INTO APPARTIENT(id, personneID, groupeID, manager)
                         VALUES(NULL,:peep,:grp,:persID)";
-
                         $check = linkPupToGroup($db,$query,$peep,$grp);
                         unset($query);
                         $query =
@@ -185,6 +188,12 @@
                 break;
             case(isset($_POST['chooseGroup'])):
                     $grp = $_POST['chooseGroup'];
+                    $query = 
+                    "SELECT name
+                    FROM GROUPES
+                    WHERE id = :id";
+
+                    $res0 = fetchName($db,$query,$grp);
 
                     $query = 
                     "SELECT GROUPES.name as GroupeName, groupeID, manager, personneID, ln, fn, ROLES.name AS statut
@@ -225,6 +234,28 @@
                             $check = rmvFromGrp($db,$query,$grp,$peep);
                         }
                         unset($query,$_SESSION['grp']);
+                    }
+                    if(isset($_POST['killGroup']))
+                    {
+                        unset($query);
+                        $query[0] =
+                        "DELETE
+                        FROM APPARTIENT
+                        WHERE groupeID = :id";
+
+                        $query[1] = 
+                        "DELETE
+                        FROM GROUPES
+                        WHERE id = :id";
+                        for($i = 0;$i < count($query);$i++)
+                        {
+                            $check = killGroup($db,$query[$i],$grp);
+                        }
+                        echo "GG";
+                    }
+                    foreach($_SESSION as $key => $value)
+                    {
+                        unset($_SESSION[$key]);
                     }
                 break;
             case(isset($_POST['searchPeep'])):
@@ -322,6 +353,39 @@
                         echo "Profil Supprimé avec succès";
                     }
                 break;
+            case(isset($_POST['mR'])):
+                    $query = 
+                    "UPDATE ROLES
+                    SET name = :name
+                    WHERE id = :id";
+
+                    for($i = 0; $i < count($_POST['role']);$i++)
+                    {
+                        $id = $_POST['role'][$i];
+                        $name = htmlspecialchars($_POST['setRoNa'][$i]);
+                        $pattern = "/^[a-zA-Z-]+$/";
+                        if(preg_match($pattern,$name))
+                        {
+
+                            $check = setRoleName($db,$query,$name,$id);
+                            echo "GG set";
+                        }
+                        if(isset($_POST['killR'][$i]))
+                        {
+                            unset($query,$id);
+                            $id = $_POST['killR'][$i];
+                            $query = 
+                            "DELETE 
+                            FROM ROLES 
+                            WHERE id != ALL(SELECT roleID FROM PERSONNES)
+                            AND id = :id";
+
+                            $check = killGroup($db,$query,$id);
+                        }
+                    }
+
+                break;
         default:
     endswitch;
 ?>
+

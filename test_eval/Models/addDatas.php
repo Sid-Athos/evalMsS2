@@ -54,22 +54,58 @@
         return $check; 
     }
 
-    function linkPupToGroup($db,$query,$peep,$grp)
+    
+    function linkPupToGroups($db,$query,$peep,$grp)
     {
+        echo "$peep      dsqd    $grp";
+        $query0 =
+        "SELECT manager
+        FROM APPARTIENT WHERE groupeID = :grp";
+        $querySettings0 =
+        array(
+            ":grp" => $grp
+        );
+        try {
+            $stmt = $db->prepare($query0);
+            $stmt->execute($querySettings0);
+        }catch(PDOException $ex){  
+        }
+        
+        $res = $stmt -> fetchAll();
+        var_dump($res);
         $querySettings =
         array(
             ":peep" => $peep,
             ":grp" => $grp,
-            ":persID" => $peep
+            ":persID" => $res[0]['manager']
         );
-
+        
         try {
             $stmt = $db->prepare($query);
             $stmt->execute($querySettings);
             $check = true;
-        }catch(PDOException $ex){   
+        }catch(PDOException $ex){ 
             $check = false;
         }
         return $check; 
     }
+    /** */ function linkPupToGroup($db,$query,$peep,$grp)
+     {
+         $querySettings =
+         array(
+             ":peep" => $peep,
+             ":grp" => $grp,
+             ":persID" => $peep
+         );
+ 
+         try {
+             $stmt = $db->prepare($query);
+             $stmt->execute($querySettings);
+             $check = true;
+         }catch(PDOException $ex){ 
+             echo $ex;  
+             $check = false;
+         }
+         return $check; 
+     }
 ?>

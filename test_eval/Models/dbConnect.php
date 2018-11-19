@@ -1,6 +1,6 @@
 <?php
     $db_username = "root";
-    $db_password = "root";
+    $db_password = "";
     $db_host = "localhost";
     $db_name = "eval_ms";
     /* PDO EN FR OU EN ARABE C ISSI */

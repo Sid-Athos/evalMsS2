@@ -89,4 +89,22 @@
         }
         return $check; 
     }
+    
+    function setRoleName($db,$query,$name,$id)
+    {
+        $querySettings = 
+        array(
+            ":name" => $name,
+            ":id" => $id
+        );
+        try {
+            $stmt = $db->prepare($query);
+            $stmt->execute($querySettings);
+            $check = true;
+        }catch(PDOException $ex){   
+            $check = false;
+        }
+        return $check; 
+
+    }
 ?>

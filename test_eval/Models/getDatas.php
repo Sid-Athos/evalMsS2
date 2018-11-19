@@ -202,7 +202,25 @@
         $res = $stmt -> fetchAll();
         return $res;
     }
-
+    function fetchName($db,$query,$data)
+    {
+        $querySettings =
+        array(
+            ":id" => $data
+        );
+        
+        try 
+        {
+            $stmt = $db->prepare($query);
+            $stmt->execute($querySettings);
+        }
+        catch(PDOException $ex)
+        {   
+            die("Failed to run query: " . $ex->getMessage());
+        }
+        $res = $stmt -> fetchAll();
+        return $res; 
+    }
     function fetchUnassignedRoles($db,$query,$peep)
     {
         $querySettings =

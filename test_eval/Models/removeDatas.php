@@ -58,4 +58,21 @@
         }
         return $check; 
     }
+    function killGroup($db,$query,$grp)
+    {
+        $querySettings =
+        array(
+            ":id" =>$grp
+        );
+
+        try {
+            $stmt = $db->prepare($query);
+            $stmt->execute($querySettings);
+            $check = true;
+        }catch(PDOException $ex){   
+            $check = false;
+            echo $ex;
+        }
+        return $check;
+    }
 ?>
