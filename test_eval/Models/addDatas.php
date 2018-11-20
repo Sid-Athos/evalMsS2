@@ -73,21 +73,35 @@
         
         $res = $stmt -> fetchAll();
         var_dump($res);
-        $querySettings =
-        array(
-            ":peep" => $peep,
-            ":grp" => $grp,
-            ":persID" => $res[0]['manager']
-        );
-        
-        try {
-            $stmt = $db->prepare($query);
-            $stmt->execute($querySettings);
-            $check = true;
-        }catch(PDOException $ex){ 
-            $check = false;
+        if(!empty($res) || $res === NULL)
+        {
+            $querySettings =
+            array(
+                ":peep" => $peep,
+                ":grp" => $grp,
+                ":persID" => $res[0]['manager']
+            );
+            
+            try {
+                $stmt = $db->prepare($query);
+                $stmt->execute($querySettings);
+                $check = true;
+            }catch(PDOException $ex){ 
+                $check = false;
+            }
+            return $check; 
+
+        } 
+        else {
+            {
+                unset($query);
+                $query =
+                "INSERT INTO APPARTIENT(id, personneID, groupeID, manager)
+                VALUES(NULL, :peep, :grp,:persID)";
+
+                linkPupToGroup($db,$query,$peep,$grp);
+            }
         }
-        return $check; 
     }
     /** */ function linkPupToGroup($db,$query,$peep,$grp)
      {

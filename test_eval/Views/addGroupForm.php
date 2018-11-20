@@ -52,8 +52,6 @@
     }
     ?>
     <br>
-    Vous pouvez aussi cocher cette case pour créer un profil à ajouter en tant que responsable :
-    <input type="checkbox" name="createManager" value="y">
     <input type="submit" value="Ajouter le groupe">
 </form>
 <script>

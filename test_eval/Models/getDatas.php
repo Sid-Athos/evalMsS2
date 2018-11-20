@@ -240,4 +240,25 @@
         $res = $stmt -> fetchAll();
         return $res;
     }
+
+    function getPersInfos($db)
+    {
+        $query =
+        "SELECT * 
+        FROM PERSONNES
+        JOIN ROLES
+        ON PERSONNES.roleID = ROLES.id";
+
+        try 
+        {
+            $stmt = $db->prepare($query);
+            $stmt->execute(NULL);
+        }
+        catch(PDOException $ex)
+        {   
+            die("Failed to run query: " . $ex->getMessage());
+        }
+        $res = $stmt -> fetchAll();
+        return $res; 
+    }
 ?>

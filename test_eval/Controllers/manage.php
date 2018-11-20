@@ -45,6 +45,10 @@
                             $res = getPupils($db);
                             include('Views/selectPupilToMod.php');
                         break;
+                    case 'showS':
+                            $res = getPersInfos($db);
+                            include('Views/showPerson.php');
+                        break;
                     default:
                 endswitch;
             break;

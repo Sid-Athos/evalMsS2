@@ -9,3 +9,7 @@ body {
 .form-control{
     width:200px;
 }
+
+table{
+    border-radius:10px;
+}
